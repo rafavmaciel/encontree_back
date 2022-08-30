@@ -1,11 +1,11 @@
 const db = require("../infraestrutura/conexao");
-const { fakerUser } = require("../faker/usuarioFaker");
+const { fakerUser } = require("../faker/dadosFaker");
 const { getUserById, postUser,deleteUser } = require("../services/user_services");
 const { body, validationResult } = require("express-validator");
 const {validarParametrosGet} = require("../helpers/validacoesUser");
 
 module.exports = (app) => {
-    app.get("/home", (req, res) => {
+    app.get("/faker", (req, res) => {
         fakerUser();
         res.send("Bem vindo a pagina inicial");
     });

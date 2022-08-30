@@ -1,0 +1,5 @@
+# configurações do mysql
+HOST = 'localhost'
+USER = 'root'
+PASSWORD = '031993Ra'
+DATABASE = 'aluga_ja'
