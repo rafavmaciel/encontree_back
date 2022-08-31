@@ -4,6 +4,7 @@ const db = require('../infraestrutura/conexao')
 
 
 function fakerUser() {
+    const listaIds = []
     for (let i = 0; i < 100; i++) {
         const usuario = {
             nome: faker.name.findName(),
@@ -14,7 +15,6 @@ function fakerUser() {
             cpf: fakerBr.br.cpf(),
             idade:faker.date.birthdate({ min: 18, max: 100, mode: 'age' }).getDate(),
         }
-        console.log(usuario)
         if(usuario.sexo == "male"){
             usuario.sexo = 0 
         }
@@ -23,15 +23,17 @@ function fakerUser() {
         }
     
         db('usuario').insert(usuario).then(res => {
-            console.log(res)
+            //console.log( 'resposta: ' + res[0])
+            fakeImoveis(res[0])
         }).catch(err => {
             console.log(err)
         })
     }
+    //console.log(listaIds)
 }
 
-function fakeImoveis() {
-    for (let i = 0; i < 2; i++) {
+function fakeImoveis(id) {
+    for (let i = 0; i < 3; i++) {
         const imovel = {
             rua: faker.address.streetName(),
             bairro: faker.address.cityName(),
@@ -43,9 +45,9 @@ function fakeImoveis() {
             quantidade_banheiros: faker.random.numeric(1),
             garagem_vaga: faker.datatype.boolean(),
             tipo_imovel: faker.random.alpha(7),
-            usuario_id_usuario: faker.random.numeric(1),
+            usuario_id_usuario: id,
         }
-        console.log(imovel)
+       
         db('imovel').insert(imovel).then(res => {
             console.log(res)
         }).catch(err => {
