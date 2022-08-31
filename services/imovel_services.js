@@ -12,10 +12,10 @@ async function getImvovelId(data, tipo) {
     }
 }
 
-async function postImovel(usuario) {
+async function postImovel(imovel) {
     try {
-        const user = await db("usuario").insert(usuario);
-        return user;
+        const data = await db("imovel").insert(imovel);
+        return data;
     } catch (err) {
         console.error(err);
         throw err;
@@ -24,13 +24,9 @@ async function postImovel(usuario) {
 
 async function deleteImovel(data, tipo) {
     try {
-        if (tipo == "email") {
-            const user = await db("usuario").delete().where({ email: data });
-            return "Usuario deletado com sucesso";
-        }
-        if (tipo == "id") {
-            const user = await db("usuario").delete().where({ id_usuario: data });
-            return "Usuario deletado com sucesso";
+        if (tipo == "id_imovel") {
+            const imovel = await db("imovel").delete().where({ id_imovel: data });
+            return "Imovel deletado com sucesso";
         }
     } catch (err) {
         console.error(err);

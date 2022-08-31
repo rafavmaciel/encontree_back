@@ -2,7 +2,7 @@ const db = require("../infraestrutura/conexao");
 const { fakeImoveis } = require("../faker/dadosFaker");
 const { getImvovelId, postImovel, deleteImovel } = require("../services/imovel_services");
 const { body, validationResult } = require("express-validator");
-const {validarParametrosGet} = require("../helpers/validacoesUser");
+const {validarParametrosimoveis} = require("../helpers/validacoesImovel");
 
 module.exports = (app) => {
     app.get("/fakerImovel", (req, res) => {
@@ -26,6 +26,14 @@ module.exports = (app) => {
 
     app.post(
         "/imovel",
+        [
+            body("rua").isLength({ min: 5 }),
+            body("numero").isLength({ min: 1, max: 5 }),
+            body("bairro").isLength({ min: 5 }),
+            body("cidade").isLength({ min: 5 }),
+            body("estado").isLength({ min: 2, max: 2 }),
+            body("cep").isLength({ min: 8, max: 8 }),
+        ],
         async (req, res) => {
             try {
                 const errors = validationResult(req);
@@ -33,6 +41,7 @@ module.exports = (app) => {
                     return res.status(400).json({ errors: errors.array() });
                 }
                 const imovel = req.body;
+                validarParametrosimoveis(req, res);
                 const imovelRequest = await postImovel(imovel);
                 res.send(imovelRequest);
             } catch (err) {

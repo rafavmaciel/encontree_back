@@ -43,4 +43,6 @@ async function deleteUser(data, tipo) {
     }
 }
 
+
+
 module.exports = { getUserById, postUser, deleteUser };
