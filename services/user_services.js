@@ -17,6 +17,16 @@ async function getUserById(data, tipo) {
     }
 }
 
+async function getImoveisUsuario(id_usuario) {
+    try {
+        const imoveis = await db("imovel").select("*").where({ usuario_id_usuario: id_usuario });
+        return imoveis;
+    } catch (err) {
+        console.error(err);
+        throw err;
+    }
+}
+
 async function postUser(usuario) {
     try {
         const user = await db("usuario").insert(usuario);
@@ -45,4 +55,4 @@ async function deleteUser(data, tipo) {
 
 
 
-module.exports = { getUserById, postUser, deleteUser };
+module.exports = { getUserById, postUser, deleteUser,getImoveisUsuario };
