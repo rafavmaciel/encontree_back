@@ -69,7 +69,7 @@ ENGINE = InnoDB;
 -- Table `aluga_ja`.`anuncio`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `aluga_ja`.`anuncio` (
-  `idtable1` INT NOT NULL AUTO_INCREMENT,
+  `id_anuncio` INT NOT NULL AUTO_INCREMENT,
   `status` INT(1) NOT NULL,
   `aceita_animal` ENUM('nao', 'pequeno-porte', 'grande-porte','aceita') NOT NULL,
   `descricao_anuncio` TEXT(4000) NULL,
@@ -78,14 +78,14 @@ CREATE TABLE IF NOT EXISTS `aluga_ja`.`anuncio` (
   `valor_aluguel` INT(8) NOT NULL,
   `imovel_id_imovel` INT NOT NULL,
   `imovel_usuario_id_usuario` INT NOT NULL,
-  PRIMARY KEY (`idtable1`, `imovel_id_imovel`, `imovel_usuario_id_usuario`),
+PRIMARY KEY (`id_anuncio`, `imovel_id_imovel`),
   INDEX `fk_table1_imovel1_idx` (`imovel_id_imovel` ASC, `imovel_usuario_id_usuario` ASC) VISIBLE,
+  UNIQUE INDEX `imovel_id_imovel_UNIQUE` (`imovel_id_imovel` ASC) VISIBLE,
   CONSTRAINT `fk_table1_imovel1`
     FOREIGN KEY (`imovel_id_imovel` , `imovel_usuario_id_usuario`)
     REFERENCES `aluga_ja`.`imovel` (`id_imovel` , `usuario_id_usuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
