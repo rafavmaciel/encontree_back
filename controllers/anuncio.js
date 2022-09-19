@@ -1,6 +1,6 @@
 const db = require("../infraestrutura/conexao");
 const { fakeAnuncios } = require("../faker/dadosFaker");
-const { getAnuncio, postAnuncio, alterarStatusAnuncio, buscaPersonalizadaAnuncio} = require("../services/anuncio_services");
+const { getAnuncio, postAnuncio, alterarStatusAnuncio, buscaPersonalizadaAnuncio,getAllAnuncios} = require("../services/anuncio_services");
 const { body, validationResult } = require("express-validator");
 const {validarParametrosAnuncio} = require("../helpers/validacoesAnuncio");
 
@@ -27,6 +27,15 @@ module.exports = (app) => {
                 const anuncio = await getAnuncio(req.query.id_usuario, "id_usuario");
                 res.status(200).send(anuncio);
             }
+        } catch (err) {
+            res.status(500).send(err);
+        }
+    });
+
+    app.get("/anuncio-all", async (req, res) => {
+        try {
+            const anuncios = await getAllAnuncios();
+            res.status(200).send(anuncios);
         } catch (err) {
             res.status(500).send(err);
         }
