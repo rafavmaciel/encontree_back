@@ -1,6 +1,6 @@
 const db = require("../infraestrutura/conexao");
 const { fakeAnuncios } = require("../faker/dadosFaker");
-const { getAnuncio,postAnuncio,alterarStatusAnuncio } = require("../services/anuncio_services");
+const { getAnuncio, postAnuncio, alterarStatusAnuncio, buscaPersonalizadaAnuncio} = require("../services/anuncio_services");
 const { body, validationResult } = require("express-validator");
 const {validarParametrosAnuncio} = require("../helpers/validacoesAnuncio");
 
@@ -69,5 +69,15 @@ module.exports = (app) => {
         }
     }
     );
-
+    
+    //buscas de anuncios personalisadas
+    app.post("/anuncio-busca-personalizada", async (req, res) => {
+        try {
+            const {parametros} = req.body;
+            const anuncios = await buscaPersonalizadaAnuncio(parametros);
+            res.send(anuncios);
+        } catch (err) {
+            res.status(500).send(err);
+        }
+    });
 }
