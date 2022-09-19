@@ -44,4 +44,30 @@ async function alterarStatusAnuncio(data) {
         throw err;
     }
 }
-module.exports = { getAnuncio, postAnuncio , alterarStatusAnuncio};
+
+async function buscaPersonalizadaAnuncio(parametros) {
+    try {
+        console.log(parametros);
+        const anuncio = db("anuncio").select("*")
+        if(parametros.aceita_animal){
+            anuncio.where("aceita_animal", parametros.aceita_animal);
+        }
+        if(parametros.restricao_fumante){
+            anuncio.where("restricao_fumante", parametros.restricao_fumante);
+        }
+        if(parametros.restricao_sexo){
+            anuncio.where("restricao_sexo", parametros.restricao_sexo);
+        }
+        if(parametros.valor_alugel_range){
+            anuncio.whereBetween("valor_aluguel", parametros.valor_alugel_range);
+        }
+        if(parametros.valor_alugel_maximo){
+            anuncio.where("valor_aluguel", "<=", parametros.valor_alugel_maximo);
+        }
+        return await anuncio;
+    } catch (err) {
+        console.error(err);
+        throw err;
+    }
+}
+module.exports = { getAnuncio, postAnuncio , alterarStatusAnuncio, buscaPersonalizadaAnuncio};
