@@ -1,16 +1,24 @@
+const user = require("../controllers/user");
 const db = require("../infraestrutura/conexao");
 
 async function getUserById(data, tipo) {
     try {
         if (tipo == "email") {
             const user = await db("usuario").select("*").where({ email: data });
-            return user;
+            if (user == null || user == undefined || user == "" || user.length == 0) {
+                return "null";
+            } else {
+                return user;
+            }
         }
         if (tipo == "id") {
             const user = await db("usuario").select("*").where({ id_usuario: data });
-            return user;
+            if (user == null || user == undefined || user == "" || user.length == 0) {
+                return "null";
+            } else {
+                return user;
+            }
         }
-        return user;
     } catch (err) {
         console.error(err);
         throw err;
@@ -53,6 +61,4 @@ async function deleteUser(data, tipo) {
     }
 }
 
-
-
-module.exports = { getUserById, postUser, deleteUser,getImoveisUsuario };
+module.exports = { getUserById, postUser, deleteUser, getImoveisUsuario };

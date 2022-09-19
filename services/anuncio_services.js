@@ -70,4 +70,17 @@ async function buscaPersonalizadaAnuncio(parametros) {
         throw err;
     }
 }
-module.exports = { getAnuncio, postAnuncio , alterarStatusAnuncio, buscaPersonalizadaAnuncio};
+
+async function getAllAnuncios() {
+    try {
+        const anuncio = await db("anuncio")
+        .select("*")
+        .innerJoin("imovel", "anuncio.imovel_id_imovel", "imovel.id_imovel")
+        return anuncio;
+    } catch (err) {
+        console.error(err);
+        throw err;
+    }
+}
+
+module.exports = { getAnuncio, postAnuncio , alterarStatusAnuncio, buscaPersonalizadaAnuncio,getAllAnuncios};

@@ -1,5 +1,5 @@
 function validarParametrosAnuncio(req, res, next) {
-    const { status, aceita_animal,restricao_sexo,restricao_fumante,valor_aluguel } = req.body;
+    const { status,titulo, aceita_animal,restricao_sexo,restricao_fumante,valor_aluguel } = req.body;
     if (typeof status != "number") {
         throw "O campo status deve ser um número";
     }
@@ -26,6 +26,9 @@ function validarParametrosAnuncio(req, res, next) {
     }
     if(valor_aluguel < 0){
         throw "O campo valor_aluguel deve ser um número positivo";
+    }
+    if(typeof titulo != "string" || !titulo.length ){
+        throw "O campo titulo deve ser uma string";
     }
 }
 module.exports = {validarParametrosAnuncio};

@@ -71,6 +71,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `aluga_ja`.`anuncio` (
   `id_anuncio` INT NOT NULL AUTO_INCREMENT,
   `status` INT(1) NOT NULL,
+  `titulo` TEXT(200) NOT NULL,
   `aceita_animal` ENUM('nao', 'pequeno-porte', 'grande-porte','aceita') NOT NULL,
   `descricao_anuncio` TEXT(4000) NULL,
   `restricao_sexo` ENUM('nao-possui', 'apenas-mulher', 'apenas-homem') NOT NULL,

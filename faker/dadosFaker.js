@@ -47,6 +47,7 @@ function fakeImoveis(id) {
             garagem_vaga: faker.datatype.boolean(),
             tipo_imovel: faker.random.alpha(7),
             usuario_id_usuario: id,
+            img_principal: faker.image.city(640, 480, true),
         };
 
         db("imovel")
@@ -67,6 +68,7 @@ function fakeAnuncios(id_imovel, id_usuario) {
     console.log(id_imovel, id_usuario);
     const anuncio = {
         status: faker.datatype.boolean(),
+        titulo: faker.lorem.sentence(),
         aceita_animal: faker.helpers.arrayElements(["nao", "pequeno-porte", "grande-porte", "aceita"]),
         descricao_anuncio: faker.lorem.paragraph(),
         restricao_sexo: faker.helpers.arrayElements(["nao-possui", "apenas-mulher", "apenas-homem"]),
