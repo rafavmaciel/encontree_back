@@ -1,0 +1,4 @@
+"restricao_fumante": "aceita-fumante",
+"restricao_sexo":"apenas-homem",
+"aceita_animal":"aceita",
+"valor_alugel_range":[400,100000]
