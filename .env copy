@@ -1,5 +1,9 @@
 # configurações do mysql
-HOST = 'localhost'
-USER = 'root'
-PASSWORD = '031993Ra'
-DATABASE = 'aluga_ja'
+#HOST = 'localhost'
+#USER = 'root'
+#PASSWORD = '123456'
+#DATABASE = 'aluga_ja'
+HOST = 'remotemysql.com'
+USER = 'R42epr0rtL'
+PASSWORD = '4upWbUAjqM'
+DATABASE = 'R42epr0rtL'
