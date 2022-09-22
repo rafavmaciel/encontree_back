@@ -6,6 +6,10 @@ async function getImvovelId(data, tipo) {
             const imovel = await db("imovel").select("*").where({ id_imovel: data });
             return imovel;
         }
+        if (tipo == "id_usuario") {
+            const imovel = await db("imovel").select("*").where({ usuario_id_usuario: data });
+            return imovel;
+        }
     } catch (err) {
         console.error(err);
         throw err;

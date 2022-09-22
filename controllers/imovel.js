@@ -12,11 +12,15 @@ module.exports = (app) => {
 
     app.get("/imovel", async (req, res) => {
         try {
-            if (!req.query.id_imovel) {
-                res.status(400).send("O id do imovel é obrigatorio");
+            if (!req.query.id_imovel && !req.query.id_usuario) {
+                res.status(400).send("O id do imovel ou id usuário obrigatorio");
             }
             if (req.query.id_imovel) {
                 const imovel = await getImvovelId(req.query.id_imovel, "id");
+                res.status(200).send(imovel);
+            }
+            if (req.query.id_usuario) {
+                const imovel = await getImvovelId(req.query.id_usuario, "id_usuario");
                 res.status(200).send(imovel);
             }
         } catch (err) {
