@@ -83,4 +83,14 @@ async function getAllAnuncios() {
     }
 }
 
-module.exports = { getAnuncio, postAnuncio , alterarStatusAnuncio, buscaPersonalizadaAnuncio,getAllAnuncios};
+async function deleteAnuncio(id) {
+    try {
+        const anuncio = await db("anuncio").delete().where({ id_anuncio: id });
+        return anuncio;
+    } catch (err) {
+        console.error(err);
+        throw err;
+    }
+}
+
+module.exports = { getAnuncio, postAnuncio , alterarStatusAnuncio, buscaPersonalizadaAnuncio,getAllAnuncios,deleteAnuncio};

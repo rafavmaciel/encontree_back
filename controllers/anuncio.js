@@ -1,6 +1,6 @@
 const db = require("../infraestrutura/conexao");
 const { fakeAnuncios } = require("../faker/dadosFaker");
-const { getAnuncio, postAnuncio, alterarStatusAnuncio, buscaPersonalizadaAnuncio,getAllAnuncios} = require("../services/anuncio_services");
+const { getAnuncio, postAnuncio, alterarStatusAnuncio, buscaPersonalizadaAnuncio,getAllAnuncios,deleteAnuncio} = require("../services/anuncio_services");
 const { body, validationResult } = require("express-validator");
 const {validarParametrosAnuncio} = require("../helpers/validacoesAnuncio");
 
@@ -89,4 +89,23 @@ module.exports = (app) => {
             res.status(500).send(err);
         }
     });
+
+    //deletar anuncio
+    app.delete("/anuncio", async (req, res) => {
+        try {
+            if (!req.query.id_anuncio) {
+                res.status(400).send("O id do anuncio é obrigatorio");
+            }
+            if (req.query.id_anuncio) {
+                const id = req.query.id_anuncio;
+                const anuncio = await deleteAnuncio(id);
+                res.sendStatus(200);
+            }
+        } catch (err) {
+            res.status(500).send(err);
+        }
+    }
+    );
+
+    
 }
