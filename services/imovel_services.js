@@ -38,4 +38,25 @@ async function deleteImovel(data, tipo) {
     }
 }
 
-module.exports = { getImvovelId, postImovel, deleteImovel };
+//editar imovel
+async function putImovel(imovel, id) {
+    try {
+        const data = await db("imovel").update(imovel).where({ id_imovel: id });
+        return data;
+    } catch (err) {
+        console.error(err);
+        throw err;
+    }
+}
+
+async function putImagemImovel(img_principal, id) {
+    try {
+        const data = await db("imovel").update({ img_principal: img_principal }).where({ id_imovel: id });
+        return "Imagem do imovel alterada com sucesso";
+    } catch (err) {
+        console.error(err);
+        throw err;
+    }
+}
+
+module.exports = { getImvovelId, postImovel, deleteImovel, putImovel, putImagemImovel };

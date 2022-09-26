@@ -1,6 +1,6 @@
 const db = require("../infraestrutura/conexao");
 const { fakeImoveis } = require("../faker/dadosFaker");
-const { getImvovelId, postImovel, deleteImovel } = require("../services/imovel_services");
+const { getImvovelId, postImovel, deleteImovel, putImovel,putImagemImovel } = require("../services/imovel_services");
 const { body, validationResult } = require("express-validator");
 const {validarParametrosimoveis} = require("../helpers/validacoesImovel");
 
@@ -63,6 +63,22 @@ module.exports = (app) => {
                 const id = req.query.id_imovel;
                 const imovel = await deleteImovel(id, "id_imovel");
                 res.send(imovel);
+            }
+        } catch (err) {
+            res.status(500).send(err);
+        }
+    });
+
+    app.put("/imovel-alt-imagem", async (req, res) => {
+        try {
+            if (!req.query.id_imovel) {
+                res.status(400).send("O id do imovel é obrigatorio");
+            }
+            if (req.query.id_imovel) {
+                const id = req.query.id_imovel;
+                const {img_principal} = req.body;
+                const imovelRequest = await putImagemImovel(img_principal, id);
+                res.send({status:200, mensagem:imovelRequest});
             }
         } catch (err) {
             res.status(500).send(err);
