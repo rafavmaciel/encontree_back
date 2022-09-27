@@ -7,4 +7,8 @@ const app = custonExpress()
 app.listen(port, function() {
     console.log(`BACKEND is running on port ${port}.`)
 })
+
+app.get("/", (req, res) => {
+    res.send("Home");
+  });
  
