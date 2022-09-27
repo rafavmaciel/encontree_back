@@ -1,4 +1,4 @@
-const custonExpress = require('./config/custonExpress')
+const custonExpress = require('./src/config/custonExpress')
 require('dotenv').config();
 const port = process.env.PORT || 3003;
 

@@ -12,7 +12,7 @@ module.exports = () => {
 
 
     consign()
-        .include('controllers')
+        .include('./src/controllers')
         .into(app)
 
 
