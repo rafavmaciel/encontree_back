@@ -9,7 +9,7 @@
     "routes": [
       {
         "src": "/(.*)",
-        "dest": "/src/config/customExpress.js"
+        "dest": "./src/config/customExpress.js"
       }
     ]
   }
