@@ -1,4 +1,5 @@
 const custonExpress = require('./src/config/custonExpress')
+const anuncio = require('./src/controllers/anuncio')
 require('dotenv').config();
 const port = process.env.PORT || 3003;
 
@@ -11,4 +12,6 @@ app.listen(port, function() {
 app.get("/", (req, res) => {
     res.send("Home");
   });
+app.use(anuncio);
+
  
