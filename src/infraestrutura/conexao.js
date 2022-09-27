@@ -1,5 +1,5 @@
-console.log(process.env.HOST)
-
+require('dotenv').config();
+console.log(process.env.HOST);
 const db  = require('knex')({
     client: 'mysql2',
     connection: {
