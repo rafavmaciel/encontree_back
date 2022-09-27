@@ -26,5 +26,9 @@
   "devDependencies": {
     "@faker-js/faker": "^7.5.0",
     "faker-br": "^0.4.1"
+  },
+  "engines": {
+    "node": ">=14.16.0",
+    "npm": ">=6.14.11"
   }
 }
