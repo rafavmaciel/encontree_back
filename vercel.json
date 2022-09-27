@@ -8,8 +8,8 @@
     ],
     "routes": [
       {
-        "src": "/(.*)",
-        "dest": "./src/config/customExpress.js"
+        "src": "/controllers/(.*)",
+        "dest": "/src/config/customExpress.js"
       }
     ]
   }
