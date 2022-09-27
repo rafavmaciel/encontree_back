@@ -24,8 +24,8 @@ function validarParametrosAnuncio(req, res, next) {
     if (typeof valor_aluguel != "number") {
         throw "O campo valor_aluguel deve ser um número";
     }
-    if(valor_aluguel < 0){
-        throw "O campo valor_aluguel deve ser um número positivo";
+    if(valor_aluguel <= 0 ){
+        throw "O campo valor_aluguel deve ser um número maior que 0";
     }
     if(typeof titulo != "string" || !titulo.length ){
         throw "O campo titulo deve ser uma string";

@@ -43,17 +43,10 @@ module.exports = (app) => {
 
     app.post(
         "/anuncio",
-        [
-            body("status").isLength({ min: 1, max: 1 }),
-        ],
         async (req, res) => {
             try {
-                const errors = validationResult(req);
-                if (!errors.isEmpty()) {
-                    return res.status(400).json({ errors: errors.array() });
-                }
-                const anuncio = req.body;
                 validarParametrosAnuncio(req, res);
+                const anuncio = req.body;
                 const anuncioRequest = await postAnuncio(anuncio);
                 res.send(anuncioRequest);
             } catch (err) {

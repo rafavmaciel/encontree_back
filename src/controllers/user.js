@@ -2,7 +2,7 @@ const db = require("../infraestrutura/conexao");
 const { fakerUser } = require("../faker/dadosFaker");
 const { getUserById, postUser,deleteUser, getImoveisUsuario } = require("../services/user_services");
 const { body, validationResult } = require("express-validator");
-const {validarParametrosGet} = require("../helpers/validacoesUser");
+const {validarParametrosGet, validarParametrosUsuario} = require("../helpers/validacoesUser");
 
 module.exports = (app) => {
     app.get("/faker", (req, res) => {
@@ -45,20 +45,9 @@ module.exports = (app) => {
 
     app.post(
         "/user",
-        [
-            body("nome").isLength({ min: 5 }),
-            body("email").isEmail(),
-            body("sexo").isLength({ min: 1, max: 1 }),
-            body("telefone").isLength({ min: 11, max: 11 }),
-            body("cpf").isLength({ min: 11, max: 11 }),
-            body("idade").isLength({ min: 2, max: 3 }),
-        ],
         async (req, res) => {
             try {
-                const errors = validationResult(req);
-                if (!errors.isEmpty()) {
-                    return res.status(400).json({ errors: errors.array() });
-                }
+                validarParametrosUsuario(req, res);
                 const usuario = req.body;
                 const userRequest = await postUser(usuario);
                 res.send(userRequest);

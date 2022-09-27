@@ -30,22 +30,10 @@ module.exports = (app) => {
 
     app.post(
         "/imovel",
-        [
-            body("rua").isLength({ min: 5 }),
-            body("numero").isLength({ min: 1, max: 5 }),
-            body("bairro").isLength({ min: 5 }),
-            body("cidade").isLength({ min: 5 }),
-            body("estado").isLength({ min: 2, max: 2 }),
-            body("cep").isLength({ min: 8, max: 8 }),
-        ],
         async (req, res) => {
             try {
-                const errors = validationResult(req);
-                if (!errors.isEmpty()) {
-                    return res.status(400).json({ errors: errors.array() });
-                }
-                const imovel = req.body;
                 validarParametrosimoveis(req, res);
+                const imovel = req.body;
                 const imovelRequest = await postImovel(imovel);
                 res.send(imovelRequest);
             } catch (err) {
