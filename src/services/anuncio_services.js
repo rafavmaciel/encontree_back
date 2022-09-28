@@ -49,6 +49,7 @@ async function buscaPersonalizadaAnuncio(parametros) {
     try {
         console.log(parametros);
         const anuncio = db("anuncio").select("*")
+        .innerJoin("imovel", "anuncio.imovel_id_imovel", "imovel.id_imovel")
         if(parametros.aceita_animal){
             anuncio.where("aceita_animal", parametros.aceita_animal);
         }
@@ -63,6 +64,12 @@ async function buscaPersonalizadaAnuncio(parametros) {
         }
         if(parametros.valor_alugel_maximo){
             anuncio.where("valor_aluguel", "<=", parametros.valor_alugel_maximo);
+        }
+        if(parametros.cidade){
+            anuncio.where("cidade", parametros.cidade);
+        }
+        if(parametros.estado){
+            anuncio.where("estado", parametros.estado);
         }
         return await anuncio;
     } catch (err) {
