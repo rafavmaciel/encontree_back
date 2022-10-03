@@ -59,4 +59,4 @@ async function putImagemImovel(img_principal, id) {
     }
 }
 
-module.exports = { getImvovelId, postImovel, deleteImovel, putImovel, putImagemImovel };
+module.exports = { getImvovelId, postImovel, deleteImovel, putImovel, putImagemImovel, putImovel};
